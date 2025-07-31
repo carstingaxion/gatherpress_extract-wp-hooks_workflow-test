@@ -37,3 +37,46 @@ jobs:
       if: ${{ success() || failure() }}
       run: |
         vendor/bin/extract-wp-hooks.php
+
+    - name: Checkout new branch
+      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
+      # And, as you already guessed, if: failure() looks at 'conclusion'.
+      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
+      run: |
+        git checkout -b fix/extract-wp-hooks-${{ github.sha }}
+
+    - name: Commit updated docs
+      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
+      # And, as you already guessed, if: failure() looks at 'conclusion'.
+      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        git add -A
+        git commit -m "Hook docs updated!"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push new branch to origin
+      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
+      # And, as you already guessed, if: failure() looks at 'conclusion'.
+      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        git push origin fix/extract-wp-hooks-${{ github.sha }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create a Pull Request
+      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
+      # And, as you already guessed, if: failure() looks at 'conclusion'.
+      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
+      # Using GitHub CLI in Workflows
+      # https://docs.github.com/en/actions/using-workflows/using-github-cli-in-workflows
+      # https://cli.github.com/manual/gh_pr_create
+      run: gh pr create -B main -H fix/extract-wp-hooks-${{ github.sha }} --title 'Update hook docs automatically' --body 'Created with ❤️ by extract-wp-hooks & GitHub action'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
