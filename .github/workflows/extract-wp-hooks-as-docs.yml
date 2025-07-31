@@ -10,6 +10,10 @@ on:
     paths: [ '**.php' ]
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+  contents: write  # Grant write permissions for the contents scope to allow pushing changes
+
 jobs:
   extract-hooks:
     runs-on: ubuntu-latest

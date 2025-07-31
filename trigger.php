@@ -24,3 +24,7 @@
 
 
 // 7. run: 
+
+// Grant write permissions for the contents scope to allow pushing changes
+
+// 8.run: 
