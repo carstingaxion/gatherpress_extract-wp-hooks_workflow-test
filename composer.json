@@ -1,0 +1,21 @@
+{
+	"name": "carstingaxion/gatherpress_extract-wp-hooks_workflow-test",
+	"description": "Powering Communities with WordPress",
+	"type": "project",
+	"license": "GPL-2.0-or-later",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "git@github.com:akirk/extract-wp-hooks.git"
+		}
+	],
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"akirk/extract-wp-hooks": "dev-main"
+	},
+	"scripts": {
+		"hooks": "@php ./vendor/bin/extract-wp-hooks.php"
+	}
+}

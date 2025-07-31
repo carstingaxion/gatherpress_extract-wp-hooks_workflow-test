@@ -14,3 +14,7 @@
 // - fatal: destination path 'docs/developer/hooks' already exists and is not an empty directory.
 // - Wiki repository not found. Creating wiki directory for output.
 // - Wiki files generated in 'wiki' directory but no git repository found
+
+
+// The workflow action is very strictly bound to using a "GitHub wiki".
+// So i try to use it via composer and have to do committing, pushing etc. on my own.
