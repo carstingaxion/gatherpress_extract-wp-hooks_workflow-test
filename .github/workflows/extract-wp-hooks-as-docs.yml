@@ -50,7 +50,6 @@ jobs:
       id: check-for-changes
       run: |
         if git diff --quiet HEAD^ HEAD -- .; then
-          echo "No changes detected"
           echo "changed=false" >> $GITHUB_OUTPUT
         else
           echo "changed=true" >> $GITHUB_OUTPUT
@@ -58,17 +57,11 @@ jobs:
 
     - name: Checkout new branch
       if: ${{ steps.check-for-changes.outputs.changed == 'true' }}
-      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
-      # And, as you already guessed, if: failure() looks at 'conclusion'.
-      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
       run: |
         git checkout -b fix/extract-wp-hooks-${{ github.sha }}
 
     - name: Commit updated docs
       if: ${{ steps.check-for-changes.outputs.changed == 'true' }}
-      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
-      # And, as you already guessed, if: failure() looks at 'conclusion'.
-      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -80,9 +73,6 @@ jobs:
 
     - name: Push new branch to origin
       if: ${{ steps.check-for-changes.outputs.changed == 'true' }}
-      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
-      # And, as you already guessed, if: failure() looks at 'conclusion'.
-      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -93,9 +83,6 @@ jobs:
 
     - name: Create a Pull Request
       if: ${{ steps.check-for-changes.outputs.changed == 'true' }}
-      # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
-      # And, as you already guessed, if: failure() looks at 'conclusion'.
-      # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
       # Using GitHub CLI in Workflows
       # https://docs.github.com/en/actions/using-workflows/using-github-cli-in-workflows
       # https://cli.github.com/manual/gh_pr_create
