@@ -57,7 +57,7 @@ jobs:
         fi
 
     - name: Checkout new branch
-      if: needs.check-for-changes.outputs.changed == 'true'
+      if: ${{ check-for-changes.outputs.changed == 'true' }}
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
@@ -65,7 +65,7 @@ jobs:
         git checkout -b fix/extract-wp-hooks-${{ github.sha }}
 
     - name: Commit updated docs
-      if: needs.check-for-changes.outputs.changed == 'true'
+      if: ${{ check-for-changes.outputs.changed == 'true' }}
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
@@ -79,7 +79,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Push new branch to origin
-      if: needs.check-for-changes.outputs.changed == 'true'
+      if: ${{ check-for-changes.outputs.changed == 'true' }}
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
@@ -92,7 +92,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create a Pull Request
-      if: needs.check-for-changes.outputs.changed == 'true'
+      if: ${{ check-for-changes.outputs.changed == 'true' }}
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
