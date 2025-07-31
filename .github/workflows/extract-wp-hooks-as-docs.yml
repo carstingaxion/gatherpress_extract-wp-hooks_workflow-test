@@ -6,7 +6,7 @@ name: Extract WordPress Hooks into /docs
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
     paths: [ '**.php' ]
   workflow_dispatch:
 
