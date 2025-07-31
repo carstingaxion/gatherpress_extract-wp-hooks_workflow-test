@@ -42,7 +42,19 @@ jobs:
       run: |
         vendor/bin/extract-wp-hooks.php
 
+    - name: Check for changes
+      id: check-for-changes
+      run: |
+        if git diff --quiet HEAD^ HEAD -- .; then
+          echo "No changes detected"
+          echo "::set-output name=changed::false"
+        else
+          echo "::set-output name=changed::true"
+        fi
+
     - name: Checkout new branch
+      needs: check-for-changes
+      if: needs.check-for-changes.outputs.changed
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
@@ -50,6 +62,8 @@ jobs:
         git checkout -b fix/extract-wp-hooks-${{ github.sha }}
 
     - name: Commit updated docs
+      needs: check-for-changes
+      if: needs.check-for-changes.outputs.changed
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
@@ -63,6 +77,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Push new branch to origin
+      needs: check-for-changes
+      if: needs.check-for-changes.outputs.changed
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
@@ -75,6 +91,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create a Pull Request
+      needs: check-for-changes
+      if: needs.check-for-changes.outputs.changed
       # Using "continue-on-error:true" results in 'conclusion' being a success in any case, while the 'outcome' can differ.
       # And, as you already guessed, if: failure() looks at 'conclusion'.
       # if: ${{ github.event.inputs.updateAllSnapshots || steps.screenshot-tests.outcome == 'failure' }}
