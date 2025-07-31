@@ -18,10 +18,12 @@ jobs:
   extract-hooks:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 2 # Modify the checkout step to fetch at least two commits (e.g., fetch-depth: 2) so that HEAD^ exists for the 'check-for-changes' step.
+
     # - uses: akirk/extract-wp-hooks@main
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
