@@ -18,3 +18,9 @@
 
 // The workflow action is very strictly bound to using a "GitHub wiki".
 // So i try to use it via composer and have to do committing, pushing etc. on my own.
+
+
+// ...
+
+
+// 7. run: 
