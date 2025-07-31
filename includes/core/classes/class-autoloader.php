@@ -39,11 +39,13 @@ class Autoloader {
 				 * This filter allows developers to add or modify autoloaders for GatherPress. By using this filter,
 				 * namespaces and their corresponding paths can be registered.
 				 *
+				 * ...additional info ....
+				 *
 				 * @param array $registered_autoloaders An associative array of namespaces and their paths.
 				 * @return array Modified array of namespaces and their paths.
 				 * @since 1.0.0
 				 *
-				 * @example Add a new directory to the namespace
+				 * @example Adds a new directory to the namespace
 				 * ```php
 				 * function gatherpress_awesome_autoloader( array $namespace ): array {
 				 *     $namespace['GatherPress_Awesome'] = __DIR__;
