@@ -31,4 +31,6 @@
 
 // "Allow GitHub Actions to create and approve pull requests" !
 
-// 9. run:
+// 9. run: WORKING! https://github.com/carstingaxion/gatherpress_extract-wp-hooks_workflow-test/actions/runs/16645554125
+
+// 10. run: Nothing has cvhanged, so lets see if a PR will be created (or better not).
