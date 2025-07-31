@@ -43,7 +43,7 @@ class Autoloader {
 				 * @return array Modified array of namespaces and their paths.
 				 * @since 1.0.0
 				 *
-				 * @example
+				 * @example Add a new directory to the namespace
 				 * ```php
 				 * function gatherpress_awesome_autoloader( array $namespace ): array {
 				 *     $namespace['GatherPress_Awesome'] = __DIR__;
