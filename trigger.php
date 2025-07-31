@@ -28,3 +28,7 @@
 // Grant write permissions for the contents scope to allow pushing changes
 
 // 8.run: 
+
+// "Allow GitHub Actions to create and approve pull requests" !
+
+// 9. run:
