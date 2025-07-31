@@ -4,7 +4,11 @@ Filters the registered autoloaders for GatherPress.
 This filter allows developers to add or modify autoloaders for GatherPress. By using this filter,
 namespaces and their corresponding paths can be registered.
 
+...additional info ....
+
 ## Example
+
+Adds a new directory to the namespace
 
 ```php
 function gatherpress_awesome_autoloader( array $namespace ): array {
@@ -27,7 +31,7 @@ add_filter( 'gatherpress_autoloader', 'gatherpress_awesome_autoloader' );
 
 ## Files
 
-- [includes/core/classes/class-autoloader.php:58](https://github.com/carstingaxion/gatherpress_extract-wp-hooks_workflow-test/blob/main/includes/core/classes/class-autoloader.php#L58)
+- [includes/core/classes/class-autoloader.php:60](https://github.com/carstingaxion/gatherpress_extract-wp-hooks_workflow-test/blob/main/includes/core/classes/class-autoloader.php#L60)
 ```php
 apply_filters( 'gatherpress_autoloader', array() )
 ```
